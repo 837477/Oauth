@@ -1,6 +1,6 @@
 # Oauth Test
 
-> Google
+> Google (구현 완료)
 
 > Apple
 

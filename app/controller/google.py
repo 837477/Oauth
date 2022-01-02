@@ -10,6 +10,10 @@ class GoogleOauth:
         self.redirect_uri = config.GOOGLE_REDIRECT_URI
 
     def auth(self, code):
+        """
+        사용자로부터 전달 받은 Authorization code를 통하여,
+        Access / Refresh Token 발행 요청 API
+        """
         return requests.post(
             url="https://oauth2.googleapis.com/token",
             headers={
