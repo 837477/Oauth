@@ -12,7 +12,7 @@ class KakaoOauth:
     def auth(self, code):
         """
         사용자로부터 전달 받은 Authorization code를 통하여,
-        Access / Refresh Token 발행 요청 API
+        Access / Refresh Token 발행 요청
         """
         return requests.post(
             url=self.athorization_server + "/token",
@@ -30,6 +30,9 @@ class KakaoOauth:
         ).json()
 
     def refresh(self, refresh_token):
+        """
+        Refresh Token을 통하여, 새로운 Access Token 발행 요청
+        """
         return requests.post(
             url=self.athorization_server + "/token",
             headers={
@@ -45,6 +48,9 @@ class KakaoOauth:
         ).json()
 
     def url(self):
+        """
+        사용자 측에서 접속 할 URL 생성
+        """
         url = self.athorization_server \
               + "/authorize" \
               + "?client_id={}" \
@@ -57,6 +63,9 @@ class KakaoOauth:
         )
 
     def userinfo(self, access_token):
+        """
+        Access Token을 통하여, 사용자 Information 요청
+        """
         return requests.get(
             url= self.api_server + "/v2/user/me",
             headers={

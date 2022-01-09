@@ -35,6 +35,11 @@ class Config:
     NAVER_REDIRECT_URI: str = environ[APP_NAME + "_NAVER_REDIRECT_URI"]
     NAVER_STATE: str = environ[APP_NAME + "_NAVER_STATE"]
 
+    # Facebook Info
+    FACEBOOK_CLIENT_ID: str = environ[APP_NAME + "_FACEBOOK_CLIENT_ID"]
+    FACEBOOK_SECRET_KEY: str = environ[APP_NAME + "_FACEBOOK_SECRET_KEY"]
+    FACEBOOK_REDIRECT_URI: str = environ[APP_NAME + "_FACEBOOK_REDIRECT_URI"]
+    FACEBOOK_STATE: str = environ[APP_NAME + "_FACEBOOK_STATE"]
 
 @dataclass
 class LocalConfig(Config):

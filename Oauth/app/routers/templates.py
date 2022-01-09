@@ -4,6 +4,7 @@ from config import config
 from controller.google import GoogleOauth
 from controller.kakao import KakaoOauth
 from controller.naver import NaverOauth
+from controller.facebook import FacebookOauth
 
 
 router = APIRouter()
@@ -19,11 +20,12 @@ async def index(request: Request):
     google = GoogleOauth(config)
     kakao = KakaoOauth(config)
     naver = NaverOauth(config)
+    facebook = FacebookOauth(config)
     context = {
         'request': request,
         'google': google.url(),
         'kakao': kakao.url(),
-        'facebook': google.url(),
+        'facebook': facebook.url(),
         'naver': naver.url()
     }
     print(context)

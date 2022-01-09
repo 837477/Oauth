@@ -3,7 +3,8 @@ from app import routers
 from app.routers import (templates,
                          google,
                          kakao,
-                         naver)
+                         naver,
+                         facebook)
 
 
 def create_app():
@@ -21,5 +22,6 @@ def create_app():
     app.include_router(google.router)
     app.include_router(kakao.router)
     app.include_router(naver.router)
+    app.include_router(facebook.router)
 
     return app
