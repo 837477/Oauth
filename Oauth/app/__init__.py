@@ -1,7 +1,8 @@
 from fastapi import FastAPI
 from app import routers
 from app.routers import (templates,
-                         google)
+                         google,
+                         kakao)
 
 
 def create_app():
@@ -17,5 +18,6 @@ def create_app():
     # Routers Settings
     app.include_router(templates.router)
     app.include_router(google.router)
+    app.include_router(kakao.router)
 
     return app

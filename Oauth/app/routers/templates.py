@@ -1,7 +1,8 @@
 from fastapi import APIRouter, Request
 from fastapi.templating import Jinja2Templates
-from controller.google import GoogleOauth
 from config import config
+from controller.google import GoogleOauth
+from controller.kakao import KakaoOauth
 
 
 router = APIRouter()
@@ -15,8 +16,13 @@ async def index(request: Request):
     - 인증에 필요한 client_id / redirect_uri 정보를 이미 작성해둔 URL를 jinja를 통하여 전달.
     """
     google = GoogleOauth(config)
+    kakao = KakaoOauth(config)
     context = {
         'request': request,
         'google': google.url(),
+        'kakao': kakao.url(),
+        'facebook': google.url(),
+        'naver': google.url()
     }
+    print(context)
     return templates.TemplateResponse("index.html", context)

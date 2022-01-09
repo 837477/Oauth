@@ -22,14 +22,17 @@ class Config:
     # Google Info
     GOOGLE_CLIENT_ID: str = environ[APP_NAME + "_GOOGLE_CLIENT_ID"]
     GOOGLE_SECRET_KEY: str = environ[APP_NAME + "_GOOGLE_SECRET_KEY"]
-    GOOGLE_API_KEY: str = environ[APP_NAME + "_GOOGLE_API_KEY"]
     GOOGLE_REDIRECT_URI: str = environ[APP_NAME + "_GOOGLE_REDIRECT_URI"]
 
     # Kakao Info
-    KAKAO_CLIENT_ID: str = environ[APP_NAME + "_GOOGLE_CLIENT_ID"]
-    KAKAO_SECRET_KEY: str = environ[APP_NAME + "_GOOGLE_SECRET_KEY"]
-    KAKAO_API_KEY: str = environ[APP_NAME + "_GOOGLE_API_KEY"]
-    KAKAO_REDIRECT_URI: str = environ[APP_NAME + "_GOOGLE_REDIRECT_URI"]
+    KAKAO_CLIENT_ID: str = environ[APP_NAME + "_KAKAO_CLIENT_ID"]
+    KAKAO_SECRET_KEY: str = environ[APP_NAME + "_KAKAO_SECRET_KEY"]
+    KAKAO_REDIRECT_URI: str = environ[APP_NAME + "_KAKAO_REDIRECT_URI"]
+
+    # Naver Info
+    NAVER_CLIENT_ID: str = environ[APP_NAME + "_KAKAO_CLIENT_ID"]
+    NAVER_SECRET_KEY: str = environ[APP_NAME + "_KAKAO_SECRET_KEY"]
+    NAVER_REDIRECT_URI: str = environ[APP_NAME + "_KAKAO_REDIRECT_URI"]
 
 
 @dataclass
