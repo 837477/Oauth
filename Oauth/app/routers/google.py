@@ -1,26 +1,11 @@
-from fastapi import APIRouter, Request
-from fastapi.templating import Jinja2Templates
-from dependencies import Config
+from fastapi import APIRouter
+from config import config
 from controller.google import GoogleOauth
-from model.mongodb.google import GoogleUsers
 
 
-router = APIRouter()
-templates = Jinja2Templates(directory="assets")
-
-
-@router.get("/google")
-async def index(request: Request):
-    """
-    유저 인증 페이지인 Google oauth login URL을 전달.
-    - 인증에 필요한 client_id / redirect_uri 정보를 이미 작성해둔 URL를 jinja를 통하여 전달.
-    """
-    google = GoogleOauth(Config)
-    context = {
-        'request': request,
-        'google': google.url(),
-    }
-    return templates.TemplateResponse("index.html", context)
+router = APIRouter(
+    prefix="/google"
+)
 
 
 @router.get("/oauth/")
@@ -39,7 +24,7 @@ async def oauth(code: str):
     3. 해당 사용자 정보를 DB에 저장 (만약, 이미 DB에 존재하면 Skip)
     4. 사용자 식별 ID를 통하여 본 서비스의 JWT Access Token을 생성
     """
-    google = GoogleOauth(Config)
+    google = GoogleOauth(config)
     return google.auth(code)
 
 
@@ -51,7 +36,7 @@ async def refresh(refresh_token: str):
     Query Parameter을 통하여 Refresh Token을 전달하면,
     새로운 Access Token이 발급됨.
     """
-    google = GoogleOauth(Config)
+    google = GoogleOauth(config)
     return google.refresh(refresh_token)
 
 

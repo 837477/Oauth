@@ -15,7 +15,7 @@ class GoogleOauth:
         Access / Refresh Token 발행 요청 API
         """
         return requests.post(
-            url="https://oauth2.googleapis.com/token",
+            url=self.api_server + "/token",
             headers={
                 "Content-Type": "application/x-www-form-urlencoded",
                 "Cache-Control": "no-cache",
@@ -31,7 +31,7 @@ class GoogleOauth:
 
     def refresh(self, refresh_token):
         return requests.post(
-            url="https://oauth2.googleapis.com/token",
+            url=self.api_server + "/token",
             headers={
                 "Content-Type": "application/x-www-form-urlencoded",
                 "Cache-Control": "no-cache",
