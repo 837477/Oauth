@@ -30,9 +30,10 @@ class Config:
     KAKAO_REDIRECT_URI: str = environ[APP_NAME + "_KAKAO_REDIRECT_URI"]
 
     # Naver Info
-    NAVER_CLIENT_ID: str = environ[APP_NAME + "_KAKAO_CLIENT_ID"]
-    NAVER_SECRET_KEY: str = environ[APP_NAME + "_KAKAO_SECRET_KEY"]
-    NAVER_REDIRECT_URI: str = environ[APP_NAME + "_KAKAO_REDIRECT_URI"]
+    NAVER_CLIENT_ID: str = environ[APP_NAME + "_NAVER_CLIENT_ID"]
+    NAVER_SECRET_KEY: str = environ[APP_NAME + "_NAVER_SECRET_KEY"]
+    NAVER_REDIRECT_URI: str = environ[APP_NAME + "_NAVER_REDIRECT_URI"]
+    NAVER_STATE: str = environ[APP_NAME + "_NAVER_STATE"]
 
 
 @dataclass

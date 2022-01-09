@@ -3,6 +3,7 @@ from fastapi.templating import Jinja2Templates
 from config import config
 from controller.google import GoogleOauth
 from controller.kakao import KakaoOauth
+from controller.naver import NaverOauth
 
 
 router = APIRouter()
@@ -17,12 +18,13 @@ async def index(request: Request):
     """
     google = GoogleOauth(config)
     kakao = KakaoOauth(config)
+    naver = NaverOauth(config)
     context = {
         'request': request,
         'google': google.url(),
         'kakao': kakao.url(),
         'facebook': google.url(),
-        'naver': google.url()
+        'naver': naver.url()
     }
     print(context)
     return templates.TemplateResponse("index.html", context)
