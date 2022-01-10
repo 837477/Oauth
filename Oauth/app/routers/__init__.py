@@ -1,4 +1,5 @@
 import time
+import jwt
 from fastapi import FastAPI, Request
 from config import config
 from model.mongodb.log import Log
@@ -39,3 +40,26 @@ def init_app(app: FastAPI):
             Log().insert_log(document=log_document)
 
         return response
+
+
+def encode_jwt(user: dict):
+    return jwt.encode(
+        payload={
+            **user,
+            **{"expires": time.time() + config.JWT_EXPIRES}
+        },
+        key=config.JWT_SECRET_KEY,
+        algorithm=config.JWT_ALGORITHM
+    )
+
+
+def decode_jwt(token: str):
+    try:
+        decoded_token = jwt.decode(
+            jwt=token,
+            key=config.JWT_SECRET_KEY,
+            algorithms=config.JWT_ALGORITHM
+        )
+        return decoded_token if decoded_token["expires"] >= time.time() else None
+    except:
+        return False

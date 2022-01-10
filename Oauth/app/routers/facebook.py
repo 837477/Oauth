@@ -23,6 +23,7 @@ async def oauth(code: str):
     2. Access Token를 Facebook API에 전달하여, 사용자 정보 획득
     3. 해당 사용자 정보를 DB에 저장 (만약, 이미 DB에 존재하면 Skip)
     4. 사용자 식별 ID를 통하여 본 서비스의 JWT Access Token을 생성
+    5. 발행된 JWT를 Cookie 등록 / 반환 (원래의 페이지로 Redirection)
 
     현재 Facebook은 redirect_uri가 https 인증이 되어있어야 테스트가 가능하다.
     (SSL 인증이 필요하므로 잠시 테스트 보류)

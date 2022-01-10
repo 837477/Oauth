@@ -14,7 +14,8 @@ class Config:
     BASE_API_TIME: float = 0.5
 
     JWT_SECRET_KEY: str = environ[APP_NAME + "_JWT_SECRET_KEY"]
-    JWT_ALGORITHM: str = "HS256"
+    JWT_ALGORITHM: str = environ[APP_NAME + "_JWT_ALGORITHM"]
+    JWT_EXPIRES: int = 3600
 
     MONGODB_URI: str = environ[APP_NAME + "_MONGODB_URI"]
     MONGODB_NAME: str = environ[APP_NAME + "_MONGODB_NAME"]

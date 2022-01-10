@@ -1,6 +1,9 @@
 from fastapi import APIRouter
+from fastapi.responses import RedirectResponse
 from config import config
+from app.routers import encode_jwt
 from controller.naver import NaverOauth
+from model.mongodb.user import User
 
 
 router = APIRouter(
@@ -23,9 +26,25 @@ async def oauth(code: str):
     2. Access Token를 Naver API에 전달하여, 사용자 정보 획득
     3. 해당 사용자 정보를 DB에 저장 (만약, 이미 DB에 존재하면 Skip)
     4. 사용자 식별 ID를 통하여 본 서비스의 JWT Access Token을 생성
+    5. 발행된 JWT를 Cookie 등록 / 반환 (원래의 페이지로 Redirection)
     """
     naver = NaverOauth(config)
-    return naver.auth(code)
+
+    auth = naver.auth(code)
+    userinfo = naver.userinfo(auth['access_token'])
+    user = {
+        "id": userinfo['response']['id'],
+        "auth_type": "naver",
+        "emial": userinfo['response']['email']
+    }
+    User().upsert_user(document=user)
+
+    jwt = encode_jwt(user)
+
+    response = RedirectResponse(url="/")
+    response.set_cookie(key="naver_jwt", value=jwt)
+
+    return response
 
 
 @router.get("/oauth/refresh")

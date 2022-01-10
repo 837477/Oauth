@@ -28,5 +28,4 @@ async def index(request: Request):
         'facebook': facebook.url(),
         'naver': naver.url()
     }
-    print(context)
     return templates.TemplateResponse("index.html", context)
